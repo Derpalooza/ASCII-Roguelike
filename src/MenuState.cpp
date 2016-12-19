@@ -1,6 +1,7 @@
 #include <iostream>
 #include "MenuState.h"
 #include "conio.h"
+#include <fstream>
 
 using namespace std; 
 
@@ -79,12 +80,15 @@ void MenuState::changeSelected(char input){
 }
 
 void MenuState::printTitle(){
-	cout <<" _____                        " << endl;
-	cout <<"|  __ \\                       " << endl;
-	cout <<"| |__) |___   __ _ _   _  ___ " << endl;
-        cout <<"|  _  // _ \\ / _` | | | |/ _ \\" << endl;
-        cout <<"| | \\ \\ (_) | (_| | |_| |  __/" << endl;
-        cout <<"|_|  \\_\\___/ \\__, |\\__,_|\\___|" << endl;
-        cout <<"              __/ |           " << endl;
-        cout <<"             |___/            " << endl;
+	string line;
+	ifstream file ("../title.txt");
+
+	if (file.is_open()){
+	
+		while (getline (file, line)){
+			cout << line << endl;			
+		}
+	}
+
+	myfile.close();
 }
