@@ -1,6 +1,12 @@
 #pragma once
 #include <string.h>
 
+/*
+  TODO: Rework the template so that we can switch between states more easily.
+        We'll probably be able to do this by switching handleInput from void to State*
+*/
+
+
 class State
 {
 	// Any setup that needs to be done upon entering a new state is handled by the constructor
