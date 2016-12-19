@@ -8,8 +8,7 @@ public:
 	void handleInput();
 	void update();
 	void draw();
-
+	bool active;
 private:
 	State* _state;
-	bool _active;
 };

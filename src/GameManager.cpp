@@ -6,11 +6,12 @@ using namespace std;
 GameManager::GameManager(){}
 
 void GameManager::run(){
-
-	_stateMachine.handleInput();
-	_stateMachine.update();
-	_stateMachine.draw();
-
+	
+	while(_stateMachine.active){
+		_stateMachine.update();
+		_stateMachine.draw();
+		_stateMachine.handleInput();
+	}
 
 	cout << "StateMachine works" << endl;
 		
