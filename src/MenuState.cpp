@@ -22,24 +22,28 @@ MenuState::MenuState()
 }
 
 void MenuState::handleInput(){
+	cout << "Menu input" << endl;
+
+	cout << "selected == " << selected << endl;	
 
 	char c;
 	
-	while (c != 'w' && c != 's'){
+	while (c != 'w' && c != 's' && c != ' '){
 	
 		c = getch();
 		
 		changeSelected(c);	
 		
 	}
+	
 }
 
 void MenuState::update(){
-
+	cout << "Menu update" << endl;
 }
 
 void MenuState::draw(){
-		
+	
 	string clearstring(100, '\n');
 	cout << clearstring << endl;	
 	printTitle();
@@ -64,6 +68,7 @@ void MenuState::changeSelected(char input){
 		case 'w':
 			selected--;
 			break;
+		
 		case 's':
 			selected++;
 			break;
@@ -73,10 +78,12 @@ void MenuState::changeSelected(char input){
 	}
 	
 	if (selected < 0) {
-		selected *= -1;
+		selected = sizeof(menuOptions)/sizeof(*menuOptions) - 1;
 	}
 	
-	selected %= sizeof(menuOptions)/sizeof(*menuOptions);
+	else {
+		selected %= sizeof(menuOptions)/sizeof(*menuOptions);
+	}
 }
 
 void MenuState::printTitle(){
@@ -90,5 +97,5 @@ void MenuState::printTitle(){
 		}
 	}
 
-	myfile.close();
+	file.close();
 }
