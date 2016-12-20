@@ -19,7 +19,11 @@ StateMachine::StateMachine(){
 }
 
 void StateMachine::handleInput(){
-	_state->handleInput();
+	State* newState = _state->handleInput();
+
+	if (newState != NULL){
+		_state = newState;
+	}
 }
 
 void StateMachine::update(){
