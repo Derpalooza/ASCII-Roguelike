@@ -5,7 +5,7 @@ class HelpState : public State {
 
 public:
 	HelpState();
-	void handleInput();
+	State* handleInput();
 	void update();
 	void draw();
 	void exit();	

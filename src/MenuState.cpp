@@ -1,5 +1,6 @@
 #include <iostream>
 #include "MenuState.h"
+#include "HelpState.h"
 #include "conio.h"
 #include <fstream>
 
@@ -21,10 +22,9 @@ MenuState::MenuState()
 
 }
 
-void MenuState::handleInput(){
-	cout << "Menu input" << endl;
-
-	cout << "selected == " << selected << endl;	
+State* MenuState::handleInput(){
+	//cout << "Menu input" << endl;
+	//cout << "selected == " << selected << endl;	
 
 	char c;
 	
@@ -36,6 +36,12 @@ void MenuState::handleInput(){
 		
 	}
 	
+	if (c == ' '){ 
+		return new HelpState();
+		
+	}
+	
+	return NULL;
 }
 
 void MenuState::update(){

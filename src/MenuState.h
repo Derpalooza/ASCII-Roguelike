@@ -7,7 +7,7 @@ class MenuState : public State {
 public:
 
 	MenuState();
-	void handleInput();
+	State* handleInput();
 	void update();
 	void draw();
 	void exit();
