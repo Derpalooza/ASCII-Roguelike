@@ -26,4 +26,4 @@ conio.o: conio.cpp conio.h
 	$(CC) -c conio.cpp
 
 clean:
-	rm *.o Rogue
+	rm *.o
