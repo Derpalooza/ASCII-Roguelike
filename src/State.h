@@ -2,8 +2,9 @@
 #include <string.h>
 
 /*
-  TODO: Rework the template so that we can switch between states more easily.
-        We'll probably be able to do this by switching handleInput from void to State*
+  TODO: 
+	Check to see if pure virtual functions need to be explicitly named in child classes
+	Refactor draw() so that it outputs the clearstring before the custom implementations are made
 */
 
 
@@ -13,7 +14,7 @@ class State
 	
 public:
 	
-	virtual State* handleInput() = 0;		// Handles received inputs
+	virtual State* handleInput() = 0;		// Handles received inputs and returns the appropriate state
 	virtual void update() = 0;			// Handles updates to the state
 	virtual void draw() = 0;			// Updates the console window
 	virtual void exit() = 0;			// Any setup that needs to be done upon leaving a  state

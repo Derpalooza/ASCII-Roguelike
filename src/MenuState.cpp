@@ -1,6 +1,7 @@
 #include <iostream>
 #include "MenuState.h"
 #include "HelpState.h"
+#include "LevelState.h"
 #include "conio.h"
 #include <fstream>
 
@@ -14,7 +15,7 @@ MenuState::MenuState()
 	
 	menuOptions[0] = "NEW GAME";
 	menuOptions[1] = "HELP";
-	menuOptions[2] = "OTHER";	
+	menuOptions[2] = "QUIT";	
 	
 	cout << "Sizeof array is: " << sizeof(menuOptions)/sizeof(*menuOptions) << endl;
 	
@@ -37,8 +38,12 @@ State* MenuState::handleInput(){
 	}
 	
 	if (c == ' '){ 
-		return new HelpState();
-		
+		if (menuOptions[selected] == "HELP"){
+			return new HelpState();
+		}
+		else if (menuOptions[selected] == "NEW GAME"){
+			return new LevelState();
+		}
 	}
 	
 	return NULL;

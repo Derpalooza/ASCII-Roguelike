@@ -1,13 +1,42 @@
 #include "LevelState.h"
+#include "conio.h"
+#include <iostream>
 
 using namespace std;
 
-LevelState::LevelState(){}
+LevelState::LevelState(){
+	/*
+	levelNumber = 1;
+	level = new Level(levelNumber);
+	*/
 
-State* LevelState::handleInput(){}
+	cout << "Level init" << endl;
+}
 
-void LevelState::update(){}
+State* LevelState::handleInput(){
+	
+	char c;
+	c = getch();
+	
+	/*
+	level->handleInput(c);
+	return NULL;
+	*/
 
-void LevelState::draw(){}
+	cout << "Level input" << endl;
+	return NULL;
+}
+
+void LevelState::update(){
+	//Level* newLevel = level->update();
+
+	cout << "Level update" << endl;
+}
+
+void LevelState::draw(){
+	//level->printLevel();
+
+	cout << "Level draw" << endl;
+}
 
 void LevelState::exit(){}

@@ -10,7 +10,6 @@ public:
 	void exit();		
 
 private:
-	//Make a vector of level classes
-	//Level level;
-	//int levelNumber;
+//	Level* level;
+//	int levelNumber;
 };
