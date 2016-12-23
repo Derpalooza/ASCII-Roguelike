@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include <string>
+#include "Player.h"
 
 class Level{
 public:
@@ -11,8 +12,10 @@ public:
 	void exit();			// destroys the level object (change to destructor)
 
 private:
+	
+	void movePosition(int &posX, int &posY, int &newX, int &newY);	// Moves an entity in the level from one position to another
+	
 	std::vector<std::string> levelArea;
 	int levelNumber;
-	// std::vector<Enemy> enemies;
-	// Player player;
+	Player* player;
 };

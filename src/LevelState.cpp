@@ -17,11 +17,8 @@ State* LevelState::handleInput(){
 	
 	char c;
 	c = getch();
-	
-	/*
+
 	level->handleInput(c);
-	return NULL;
-	*/
 
 	cout << "Level input" << endl;
 	return NULL;
