@@ -5,10 +5,10 @@
 using namespace std;
 
 LevelState::LevelState(){
-	/*
+
 	levelNumber = 1;
 	level = new Level(levelNumber);
-	*/
+
 
 	cout << "Level init" << endl;
 }
@@ -34,9 +34,11 @@ void LevelState::update(){
 }
 
 void LevelState::draw(){
-	//level->printLevel();
 
-	cout << "Level draw" << endl;
+	string clearstring(100, '\n');
+	cout << clearstring << endl;
+
+	level->printLevel();
 }
 
 void LevelState::exit(){}

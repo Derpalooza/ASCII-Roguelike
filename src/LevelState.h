@@ -1,5 +1,6 @@
 #pragma once
 #include "State.h"
+#include "Level.h"
 
 class LevelState : public State{
 public:
@@ -10,6 +11,6 @@ public:
 	void exit();		
 
 private:
-//	Level* level;
-//	int levelNumber;
+	Level* level;
+	int levelNumber;
 };
