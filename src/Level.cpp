@@ -9,7 +9,7 @@ Level::Level(int stage){
 	// TODO: Comb level file for player position and record in player object
 		
 	string line;
-	ifstream file ("../level/leveltest2.txt");
+	ifstream file ("../assets/levels/leveltest2.txt");
 	
 	player = new Player();
 	 	
