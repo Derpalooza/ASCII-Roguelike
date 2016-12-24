@@ -9,12 +9,8 @@ StateMachine::StateMachine(){
 	//Initialize state to "Menu"
 	
 	cout << "Rogue Engine." << endl;
-	
-	// The error in MenuState is  appearing here. _state only points to initstate, and since initstate deallocates 
-	// after it goes out of scope, _state will point to a null object.
-	
 	_state = new MenuState();
-	//_active = true;
+	active = true;
 
 }
 
