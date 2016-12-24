@@ -3,6 +3,7 @@
 #include "MenuState.h"
 #include "conio.h"
 #include <string>
+#include <fstream>
 
 using namespace std;
 
@@ -25,8 +26,15 @@ void HelpState::draw(){
 	//cout << "Help draw" << endl;
 	string clearString(100, '\n');
 	cout << clearString << endl;
-	cout << "YE OLDE HELP SCREEN" << endl;
-	cout << "PRESS ANY KEY TO CONTINUE" << endl;
+	
+	string line;
+	ifstream file("../assets/help_screen.txt");
+	
+	if (file.is_open()){
+		while (getline(file, line)){
+			cout << line << endl;
+		}
+	}
 }
 
 void HelpState::exit(){
