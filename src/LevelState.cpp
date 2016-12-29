@@ -25,7 +25,9 @@ State* LevelState::handleInput(){
 }
 
 void LevelState::update(){
-	//Level* newLevel = level->update();
+	
+	//Modify so that it returns a flag indicating if an enemy has rammed into the player
+	level->update();
 
 	cout << "Level update" << endl;
 }
