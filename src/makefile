@@ -1,10 +1,10 @@
 CC=g++
 CFLAGS=-g -std=c++11 -Wall -pedantic
-OBJS=main.o GameManager.o StateMachine.o MenuState.o HelpState.o LevelState.o Level.o Player.o Enemy.o conio.o
+OBJS=main.o GameManager.o StateMachine.o State.o MenuState.o HelpState.o LevelState.o Level.o Player.o Enemy.o conio.o
 
 all: Rogue
 
-Rogue: main.o GameManager.o StateMachine.o MenuState.o HelpState.o LevelState.o Level.o Player.o Enemy.o conio.o
+Rogue: main.o GameManager.o StateMachine.o State.o MenuState.o HelpState.o LevelState.o Level.o Player.o Enemy.o conio.o
 	$(CC) $(CFLAGS) $(OBJS) -o Rogue
 
 main.o: main.cpp GameManager.h
@@ -15,6 +15,9 @@ GameManager.o: GameManager.cpp GameManager.h
 
 StateMachine.o: StateMachine.cpp StateMachine.h State.h MenuState.h
 	$(CC) $(CFLAGS) -c StateMachine.cpp
+
+State.o: State.cpp State.h
+	$(CC) $(CFLAGS) -c State.cpp
 
 MenuState.o: MenuState.cpp MenuState.h State.h conio.h
 	$(CC) $(CFLAGS) -c MenuState.cpp
