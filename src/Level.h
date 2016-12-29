@@ -13,7 +13,6 @@ public:
 	void exit();			// destroys the level object (change to destructor)
 
 private:
-	void moveEnemies();	
 	void movePosition(int &posX, int &posY, int &newX, int &newY);	// Moves an entity in the level from one position to another
 	std::vector<Enemy*> enemies;
 	std::vector<std::string> levelArea;

@@ -18,7 +18,7 @@ State* LevelState::handleInput(){
 	char c;
 	c = getch();
 
-	level->handleInput(c);
+	level->movePlayer(c);
 
 	cout << "Level input" << endl;
 	return NULL;
@@ -27,7 +27,7 @@ State* LevelState::handleInput(){
 void LevelState::update(){
 	
 	//Modify so that it returns a flag indicating if an enemy has rammed into the player
-	level->update();
+	level->moveEnemies();
 
 	cout << "Level update" << endl;
 }
