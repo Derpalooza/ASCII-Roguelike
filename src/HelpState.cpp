@@ -23,9 +23,7 @@ void HelpState::update(){
 } 
 
 void HelpState::draw(){
-	//cout << "Help draw" << endl;
-	string clearString(100, '\n');
-	cout << clearString << endl;
+	State::draw();
 	
 	string line;
 	ifstream file("../assets/help_screen.txt");

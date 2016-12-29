@@ -33,10 +33,7 @@ void LevelState::update(){
 }
 
 void LevelState::draw(){
-
-	string clearstring(100, '\n');
-	cout << clearstring << endl;
-
+	State::draw();
 	level->printLevel();
 }
 

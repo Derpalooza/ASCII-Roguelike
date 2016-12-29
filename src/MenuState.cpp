@@ -55,8 +55,7 @@ void MenuState::update(){
 
 void MenuState::draw(){
 	
-	string clearstring(100, '\n');
-	cout << clearstring << endl;	
+	State::draw();	
 	printTitle();
 	
 	for (int i=0; i < sizeof(menuOptions)/sizeof(*menuOptions); i++){
