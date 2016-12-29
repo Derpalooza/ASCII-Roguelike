@@ -27,7 +27,6 @@ Level::Level(int stage){
 					
 					// Create the player object from position data
 					// TODO: make a new constructor for the player object
-					cout << "Player identified at (" << i << ", " << levelArea.size()-1 << ")" << endl;
 					player.posX = i;
 					player.posY = levelArea.size()-1;
 					break;
@@ -35,7 +34,6 @@ Level::Level(int stage){
 				else if (line[i] == 'S'){
 				
 					// Push to the vector a pointer to the enemy
-					cout << "Enemy identified at (" << i << ", " << levelArea.size()-1 << ")" << endl;
 					newEnemy = new Enemy(i, levelArea.size()-1);
 					enemies.push_back(newEnemy);
 				}
@@ -48,25 +46,17 @@ Level::Level(int stage){
 
 }
 
-void Level::movePlayer(char c){
+void Level::movePlayer(char input){
 
 	int newX = player.posX, newY = player.posY;
-
-	switch(c) {
-		case 'w':
-			newY--;
-			break;
-		case 'a':
-			newX--;
-			break;
-		case 's':
-			newY++;
-			break;
-		case 'd':
-			newX++;
-			break;
+	getNewDir(input, newX, newY);
+	
+	/*
+	if (levelArea[newY][newX] == 'S'){
+		//find pointer to enemy matching new coords
+		player->attackEnemy(Enemy enemy)
 	}
-
+	*/
 	movePosition(player.posX, player.posY, newX, newY);
 
 }
@@ -89,38 +79,42 @@ void Level::movePosition(int &posX, int &posY, int &newX, int &newY){
 	}		
 }
 
-void Level::moveEnemies(){
+void Level::getNewDir(char newDir, int& newX, int& newY){
+	switch (newDir){
+                        case 'w':
+                                newY--;
+                                break;
+
+                        case 'a':
+                                newX--;
+                                break;
+
+                        case 's':
+                                newY++;
+                                break;
+
+                        case 'd':
+                                newX++;
+                                break;
+                }
+
+}
+
+void Level::updateEnemies(){
 	
+	// Instead of swapping.
 	
 	for (int i=0; i < enemies.size(); i++){
 		int newX = enemies[i]->posX, newY = enemies[i]->posY;
 		
-		int newDir = enemies[i]->movePosition();
+		getNewDir(enemies[i]->movePosition(player.posX, player.posY), newX, newY);
 			
-		switch (newDir){
-			case 1:
-				newY--;
-				cout << "Enemy " << i+1 << " moves up" << endl;
-				break;
-
-			case 2:
-				newX--;
-				cout << "Enemy " << i+1 << " moves left" << endl;
-				break;
-
-			case 3:
-				newY++;
-				cout << "Enemy " << i+1 << " moves down" << endl;
-				break;
-			
-			case 4:
-				newX++;
-				cout << "Enemy " << i+1 << " moves right" << endl;
-				break;
-		}	
+		/*if (levelArea[newY][newX] == '@') { 
+			enemy[i]->attackPlayer(player);
+		}
+		else*/
 		movePosition(enemies[i]->posX, enemies[i]->posY, newX, newY);
 	
-	cout << "Enemy at (" << enemies[i]->posX << ", " << enemies[i]->posY << ")\n";
 	}
 	
 	 
