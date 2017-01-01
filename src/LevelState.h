@@ -9,7 +9,7 @@ public:
 	State* handleInput();
 	void update();
 	void draw();
-	void exit();		
+	~LevelState();
 
 private:
 	Level* level;

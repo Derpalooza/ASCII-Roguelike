@@ -35,6 +35,3 @@ void HelpState::draw(){
 	}
 }
 
-void HelpState::exit(){
-	//cout << "Help exit" << endl;
-}

@@ -68,10 +68,6 @@ void MenuState::draw(){
 
 }
 
-void MenuState::exit(){
-
-}
-
 void MenuState::changeSelected(char input){
 	
 	switch (input){

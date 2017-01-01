@@ -5,12 +5,10 @@
 class MenuState : public State {
 
 public:
-
 	MenuState();
 	State* handleInput();
 	void update();
 	void draw();
-	void exit();
 private:	
 	void printTitle();
 	void changeSelected(char input);

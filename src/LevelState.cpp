@@ -50,4 +50,6 @@ void LevelState::draw(){
 	level->printLevel();
 }
 
-void LevelState::exit(){}
+LevelState::~LevelState(){
+	delete player;
+}

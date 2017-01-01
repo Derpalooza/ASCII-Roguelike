@@ -8,6 +8,4 @@ public:
 	State* handleInput();
 	void update();
 	void draw();
-	void exit();	
-
 };

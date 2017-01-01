@@ -17,6 +17,4 @@ public:
 	virtual State* handleInput() = 0;		// Handles received inputs and returns the appropriate state
 	virtual void update() = 0;			// Handles updates to the state
 	virtual void draw();				// Updates the console window
-	virtual void exit() = 0;			// Any setup that needs to be done upon leaving a  state
-
 };
