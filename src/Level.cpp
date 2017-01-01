@@ -51,7 +51,11 @@ Level::Level(int stage){
 }
 
 int Level::movePlayer(char input){
-
+	
+	if (player.currentHP == 0){
+		return -1;
+	}
+	
 	int newX = player.posX, newY = player.posY;
 	getNewDir(input, newX, newY);
 	
@@ -91,10 +95,9 @@ int Level::movePlayer(char input){
 			}
 			
 			player.receiveDmg(enemies[enemyID]->attack);
-			
+
 			if (player.currentHP == 0){
 				levelText.push_back("The enemy attacked! You have died...");
-				return -1;
 			}
 			else{
 				levelText.push_back("The enemy attacked! You have " + to_string(player.currentHP) + "HP remaining.");
@@ -213,4 +216,10 @@ void Level::printLevel(){
 	
 }
 
-void Level::exit(){}
+Level::~Level(){
+	for (int i=0; i<enemies.size(); i++){
+		delete enemies[i];
+	}
+	
+	enemies.clear();
+}

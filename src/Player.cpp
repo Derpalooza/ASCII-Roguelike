@@ -18,6 +18,5 @@ void Player::receiveDmg(int enemyAttack){
 		currentHP = 0;
 	}
 
-	cout << currentHP << endl;
 }
 

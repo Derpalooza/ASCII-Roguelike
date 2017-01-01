@@ -25,7 +25,6 @@ State* LevelState::handleInput(){
 		case 0:
 			return NULL;
 		case -1:
-			c = getch();
 			return new MenuState;
 		default:
 			delete level;
