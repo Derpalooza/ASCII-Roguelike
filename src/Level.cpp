@@ -12,8 +12,12 @@ using namespace std;
 
 Level::Level(int stage){
 
+	string levelPath = "../assets/levels/level";
+	levelPath.append(1, (char)(stage+48));
+	levelPath.append(".txt");
+	ifstream file (levelPath);
+	
 	string line;
-	ifstream file ("../assets/levels/leveltest2.txt");
 	
 	if (file.is_open()){
 	
@@ -21,7 +25,7 @@ Level::Level(int stage){
 			
 			levelArea.push_back(line);
 			Enemy* newEnemy;
-				
+			
 			for (int i=0; i<line.length(); i++){
 				if (line[i] == '@'){
 					
@@ -29,8 +33,8 @@ Level::Level(int stage){
 					// TODO: make a new constructor for the player object
 					player.posX = i;
 					player.posY = levelArea.size()-1;
-					break;
 				}
+
 				else if (line[i] == 'S'){
 				
 					// Push to the vector a pointer to the enemy
@@ -46,18 +50,61 @@ Level::Level(int stage){
 
 }
 
-void Level::movePlayer(char input){
+int Level::movePlayer(char input){
 
 	int newX = player.posX, newY = player.posY;
 	getNewDir(input, newX, newY);
 	
-	/*
-	if (levelArea[newY][newX] == 'S'){
-		//find pointer to enemy matching new coords
-		player->attackEnemy(Enemy enemy)
+	switch(levelArea[newY][newX]){
+
+		case '.': 
+			movePosition(player.posX, player.posY, newX, newY);
+			return 0;
+
+		case '~':
+			return (levelNumber + 1);
+
+		case 'S':
+			//find pointer to enemy matching new coords
+			int enemyID;
+	
+			for (int i=0; i < enemies.size(); i++){
+				if ((newX == enemies[i]->posX) && (newY == enemies[i]->posY)){
+					enemyID = i;
+					break;
+				}
+			}
+		
+			enemies[enemyID]->receiveDmg(player.attack);
+		
+			if (enemies[enemyID]->currentHP == 0){
+				delete enemies[enemyID];
+				enemies[enemyID] = enemies.back();
+				enemies.pop_back();
+				levelArea[newY][newX] = '.';
+				levelText.push_back("Attacked enemy! Enemy has fallen!");
+			} 
+			
+			else {
+				string line = "Attacked enemy! Enemy has " + to_string(enemies[enemyID]->currentHP) + "HP remaining.";
+				levelText.push_back(line);
+			}
+			
+			player.receiveDmg(enemies[enemyID]->attack);
+			
+			if (player.currentHP == 0){
+				levelText.push_back("The enemy attacked! You have died...");
+				return -1;
+			}
+			else{
+				levelText.push_back("The enemy attacked! You have " + to_string(player.currentHP) + "HP remaining.");
+			}
+			
+			return 0;
+
+		default:
+			return 0;
 	}
-	*/
-	movePosition(player.posX, player.posY, newX, newY);
 
 }
 
@@ -109,10 +156,11 @@ void Level::updateEnemies(){
 		
 		getNewDir(enemies[i]->movePosition(player.posX, player.posY), newX, newY);
 			
-		/*if (levelArea[newY][newX] == '@') { 
-			enemy[i]->attackPlayer(player);
+		if (levelArea[newY][newX] == '@') { 
+			//enemies[i]->attackPlayer(player);
+			//levelText.push_back("")	
 		}
-		else*/
+		
 		movePosition(enemies[i]->posX, enemies[i]->posY, newX, newY);
 	
 	}
@@ -120,12 +168,49 @@ void Level::updateEnemies(){
 	 
 }
 
+void Level::updateStatusBar(){
+	string statusBar = "HP |";
+	
+	if (player.currentHP > 0){
+		int barLength = (int)(20 * ((float)player.currentHP/(float)player.maxHP) + 1);
+		
+		for (int i=0; i < 20; i++) {
+			if (i < barLength) {
+				statusBar.append(1, '#');
+			}
+			else{
+				statusBar.append(1, ' ');
+			}
+		}
+	}
+	else {
+		statusBar.append(20, ' ');
+	}
+	statusBar.append("| ");
+	
+	cout << statusBar << player.currentHP << "/" << player.maxHP << endl;
+	
+}
+
 void Level::printLevel(){
 	for (int i=0; i<levelArea.size(); i++){
 		cout << levelArea[i] << endl;
 	}
 	
-	cout << "Player position is: (" << player.posX << ", " << player.posY << ")\n"; 
+	updateStatusBar();
+	
+	for (int i=0; i < levelText.size(); i++){
+		cout << levelText[i] << endl;
+	}
+	
+	if (levelText.size() < 2) {
+		for (int i=0; i < (2 - levelText.size()); i++){
+			cout << "\n";
+		}
+	}
+	
+	levelText.clear();
+	
 }
 
 void Level::exit(){}
