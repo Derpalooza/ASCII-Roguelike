@@ -1,4 +1,5 @@
 #include "LevelState.h"
+#include "MenuState.h"
 #include "conio.h"
 #include <iostream>
 
@@ -18,10 +19,20 @@ State* LevelState::handleInput(){
 	char c;
 	c = getch();
 
-	level->movePlayer(c);
-
-	cout << "Level input" << endl;
-	return NULL;
+	int action = level->movePlayer(c);
+	
+	switch (action){
+		case 0:
+			return NULL;
+		case -1:
+			c = getch();
+			return new MenuState;
+		default:
+			delete level;
+			level = new Level(action);
+			return NULL;
+	
+	}
 }
 
 void LevelState::update(){
