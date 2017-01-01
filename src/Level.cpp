@@ -94,15 +94,6 @@ int Level::movePlayer(char input){
 				levelText.push_back(line);
 			}
 			
-			player.receiveDmg(enemies[enemyID]->attack);
-
-			if (player.currentHP == 0){
-				levelText.push_back("The enemy attacked! You have died...");
-			}
-			else{
-				levelText.push_back("The enemy attacked! You have " + to_string(player.currentHP) + "HP remaining.");
-			}
-			
 			return 0;
 
 		default:
@@ -159,13 +150,26 @@ void Level::updateEnemies(){
 		
 		getNewDir(enemies[i]->movePosition(player.posX, player.posY), newX, newY);
 			
-		if (levelArea[newY][newX] == '@') { 
-			//enemies[i]->attackPlayer(player);
-			//levelText.push_back("")	
+		if( (player.currentHP > 0) &&
+		   ((levelArea[newY][newX] == '@') || 
+		    (levelArea[newY][newX] == '@') ||
+		    (levelArea[newY][newX] == '@') ||
+		    (levelArea[newY][newX] == '@'))) 
+		{ 
+			player.receiveDmg(enemies[i]->attack);
+			
+			if (player.currentHP == 0){
+				levelText.push_back("The enemy attacked! You have died...");
+				levelText.push_back("Press any key to continue...");
+			}
+			else{
+				levelText.push_back("The enemy attacked! You have " + to_string(player.currentHP) + "HP remaining.");
+			}
+				
 		}
-		
-		movePosition(enemies[i]->posX, enemies[i]->posY, newX, newY);
-	
+		else{
+			movePosition(enemies[i]->posX, enemies[i]->posY, newX, newY);
+		}
 	}
 	
 	 
