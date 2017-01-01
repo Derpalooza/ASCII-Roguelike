@@ -7,11 +7,14 @@ using namespace std;
 
 LevelState::LevelState(){
 
+	player = new Player();
+	
 	levelNumber = 1;
-	level = new Level(levelNumber);
+	level = new Level(levelNumber, player);
 
 
 	cout << "Level init" << endl;
+	cout << player->currentHP << "dadasdas" << endl;
 }
 
 State* LevelState::handleInput(){
@@ -28,7 +31,7 @@ State* LevelState::handleInput(){
 			return new MenuState;
 		default:
 			delete level;
-			level = new Level(action);
+			level = new Level(action, player);
 			return NULL;
 	
 	}
