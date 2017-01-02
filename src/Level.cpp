@@ -82,8 +82,9 @@ int Level::movePlayer(char input){
 					break;
 				}
 			}
-		
-			enemies[enemyID]->receiveDmg(player->attack);
+			
+			cout << "ENEMY RECEIVING DAMAGE!" << endl;	
+			enemies[enemyID]->receiveDmg(player);
 		
 			if (enemies[enemyID]->currentHP == 0){
 				delete enemies[enemyID];
@@ -179,15 +180,18 @@ void Level::updateEnemies(){
 	 
 }
 
-void Level::updateStatusBar(){
-	string statusBar = "HP |";
+void Level::updateStatusBar(int current, int max, char bar){
+	string statusBar;
 	
 	if (player->currentHP > 0){
-		int barLength = (int)(20 * ((float)player->currentHP/(float)player->maxHP) + 1);
+		int barLength = (int)(20 * ((float)current/(float)max));
+		if (bar == '#'){
+			barLength++;
+		}
 		
 		for (int i=0; i < 20; i++) {
 			if (i < barLength) {
-				statusBar.append(1, '#');
+				statusBar.append(1, bar);
 			}
 			else{
 				statusBar.append(1, ' ');
@@ -199,8 +203,7 @@ void Level::updateStatusBar(){
 	}
 	statusBar.append("| ");
 	
-	cout << statusBar << player->currentHP << "/" << player->maxHP << endl;
-	
+	cout << statusBar << current << "/" << max << endl;
 }
 
 void Level::printLevel(){
@@ -208,7 +211,13 @@ void Level::printLevel(){
 		cout << levelArea[i] << endl;
 	}
 	
-	updateStatusBar();
+	cout << "Level " << player->level << endl;
+		
+	cout << "HP |";
+	updateStatusBar(player->currentHP, player->maxHP, '#');
+	
+	cout << "EXP|";
+	updateStatusBar(player->currentEXP, player->maxEXP, '-');
 	
 	for (int i=0; i < levelText.size(); i++){
 		cout << levelText[i] << endl;
