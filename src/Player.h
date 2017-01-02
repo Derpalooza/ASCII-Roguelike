@@ -10,6 +10,10 @@ public:
 	int maxHP;
 	int attack;
 	int defence;
+	int level;
+	int currentEXP;
+	int maxEXP;
+	void EXPGain(int EXP);
 	void receiveDmg(int enemyAttack);
 
 private:
