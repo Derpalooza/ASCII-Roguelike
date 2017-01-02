@@ -1,7 +1,7 @@
 #include "Enemy.h"
 #include <random>
 #include <ctime>
-#include <stdio.h>
+#include <iostream>
 #include <cmath>
 
 using namespace std;
@@ -13,6 +13,7 @@ Enemy::Enemy(int posX, int posY){
 	attack = 20;
 	defence = 20;
 	currentHP = maxHP;
+	EXPYield = 30;
 }
 
 //Make it so that proximity depends on the level
@@ -35,22 +36,18 @@ char Enemy::movePosition(int posX, int posY){
 		
 		if (a_dx >= a_dy){
 			if (dx > 0){ 
-				//printf("dx = %d, dy = %d, Enemy must move left\n", dx, dy);
 				return 'a'; 
 			}
 			else if (dx < 0) {
-				//printf("dx = %d, dy = %d, Enemy must move right\n", dx, dy);
 				return 'd';
 			}
 		}
 		
 		else {
 			if (dy > 0){
-				//printf("dx = %d, dy = %d, Enemy must move up\n", dx, dy);
 				return 'w';
 			}
 			else if (dy < 0){
-				//printf("dx = %d, dy = %d, Enemy must move down\n", dx, dy);
 				return 's';
 			}
 		}
@@ -75,10 +72,12 @@ char Enemy::movePosition(int posX, int posY){
 		
 }
 
-void Enemy::receiveDmg(int playerAttack){
-	currentHP -= 10 * (playerAttack/defence);
-	
-	if (currentHP < 0){
+void Enemy::receiveDmg(Player* player){
+	currentHP -= 10 * (player->attack/this->defence);
+	cout << "CURRENT HP IS: " << currentHP << endl;	
+	if (currentHP <= 0){
 		currentHP = 0;
+		printf("Enemy is kill");
+		player->EXPGain(this->EXPYield);
 	}
 }

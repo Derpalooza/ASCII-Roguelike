@@ -1,5 +1,5 @@
 #pragma once
-
+#include "Player.h"
 class Enemy{
 public:
 	Enemy(int posX, int posY);
@@ -9,6 +9,7 @@ public:
 	int defence;
 	int posX;
 	int posY;
-	void receiveDmg(int playerAttack);
+	int EXPYield;
+	void receiveDmg(Player* player);
 	char movePosition(int posX, int posY);
 };
