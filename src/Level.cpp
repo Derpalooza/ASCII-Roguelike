@@ -13,7 +13,7 @@ using namespace std;
 Level::Level(int stage, Player* player){
 	
 	this->player = player;
-	player->currentHP = player->maxHP;
+	player->restoreHP();
 			
 	
 	string levelPath = "../assets/levels/level";
@@ -56,7 +56,7 @@ Level::Level(int stage, Player* player){
 
 int Level::movePlayer(char input){
 	
-	if (player->currentHP == 0){
+	if (player->getHP() == 0){
 		return -1;
 	}
 	
@@ -83,10 +83,9 @@ int Level::movePlayer(char input){
 				}
 			}
 			
-			cout << "ENEMY RECEIVING DAMAGE!" << endl;	
 			enemies[enemyID]->receiveDmg(player);
 		
-			if (enemies[enemyID]->currentHP == 0){
+			if (enemies[enemyID]->getHP() == 0){
 				delete enemies[enemyID];
 				enemies[enemyID] = enemies.back();
 				enemies.pop_back();
@@ -95,7 +94,7 @@ int Level::movePlayer(char input){
 			} 
 			
 			else {
-				string line = "Attacked enemy! Enemy has " + to_string(enemies[enemyID]->currentHP) + "HP remaining.";
+				string line = "Attacked enemy! Enemy has " + to_string(enemies[enemyID]->getHP()) + "HP remaining.";
 				levelText.push_back(line);
 			}
 			
@@ -155,20 +154,20 @@ void Level::updateEnemies(){
 		
 		getNewDir(enemies[i]->movePosition(player->posX, player->posY), newX, newY);
 			
-		if( (player->currentHP > 0) &&
+		if( (player->getHP() > 0) &&
 		   ((levelArea[newY][newX] == '@') || 
 		    (levelArea[newY][newX] == '@') ||
 		    (levelArea[newY][newX] == '@') ||
 		    (levelArea[newY][newX] == '@'))) 
 		{ 
-			player->receiveDmg(enemies[i]->attack);
+			player->receiveDmg(enemies[i]->getAttack());
 			
-			if (player->currentHP == 0){
+			if (player->getHP() == 0){
 				levelText.push_back("The enemy attacked! You have died...");
 				levelText.push_back("Press any key to continue...");
 			}
 			else{
-				levelText.push_back("The enemy attacked! You have " + to_string(player->currentHP) + "HP remaining.");
+				levelText.push_back("The enemy attacked! You have " + to_string(player->getHP()) + "HP remaining.");
 			}
 				
 		}
@@ -183,7 +182,7 @@ void Level::updateEnemies(){
 void Level::updateStatusBar(int current, int max, char bar){
 	string statusBar;
 	
-	if (player->currentHP > 0){
+	if (player->getHP() > 0){
 		int barLength = (int)(20 * ((float)current/(float)max));
 		if (bar == '#'){
 			barLength++;
@@ -211,13 +210,13 @@ void Level::printLevel(){
 		cout << levelArea[i] << endl;
 	}
 	
-	cout << "Level " << player->level << endl;
+	cout << "Level " << player->getLevel() << endl;
 		
 	cout << "HP |";
-	updateStatusBar(player->currentHP, player->maxHP, '#');
+	updateStatusBar(player->getHP(), player->getMaxHP(), '#');
 	
 	cout << "EXP|";
-	updateStatusBar(player->currentEXP, player->maxEXP, '-');
+	updateStatusBar(player->getEXP(), player->getMaxEXP(), '-');
 	
 	for (int i=0; i < levelText.size(); i++){
 		cout << levelText[i] << endl;

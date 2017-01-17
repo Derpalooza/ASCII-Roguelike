@@ -16,13 +16,7 @@ Enemy::Enemy(int posX, int posY){
 	EXPYield = 30;
 }
 
-//Make it so that proximity depends on the level
-
 char Enemy::movePosition(int posX, int posY){
-
-	/*
-		1 - up, 2 - left, 3 - down, 4 - right
-	*/
 
 	int dx = this->posX - posX;
 	int dy = this->posY - posY;
@@ -73,11 +67,22 @@ char Enemy::movePosition(int posX, int posY){
 }
 
 void Enemy::receiveDmg(Player* player){
-	currentHP -= 10 * (player->attack/this->defence);
-	cout << "CURRENT HP IS: " << currentHP << endl;	
+	currentHP -= 10 * (player->getAttack()/this->defence);
+	
 	if (currentHP <= 0){
 		currentHP = 0;
-		printf("Enemy is kill");
 		player->EXPGain(this->EXPYield);
 	}
+}
+
+int Enemy::getHP(){
+	return currentHP;
+}
+
+int Enemy::getMaxHP(){
+	return maxHP;
+}
+
+int Enemy::getAttack(){
+	return attack;
 }

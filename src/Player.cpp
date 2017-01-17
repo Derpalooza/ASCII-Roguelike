@@ -20,8 +20,8 @@ void Player::EXPGain(int EXP){
 		level++;
 		cout << "Player leveled up!" << endl;
 		currentEXP -= maxEXP;
-		attack++;
-		defence++;
+		attack += 3;
+		defence += 3;
 		maxHP++;
 		currentHP++;
 		maxEXP++;
@@ -37,3 +37,30 @@ void Player::receiveDmg(int enemyAttack){
 
 }
 
+void Player::restoreHP(){
+	currentHP = maxHP;
+}
+
+int Player::getHP(){
+	return currentHP;
+}
+
+int Player::getMaxHP(){
+	return maxHP;
+}
+
+int Player::getLevel(){
+	return level;
+}
+
+int Player::getAttack(){
+	return attack;
+}
+
+int Player::getEXP(){
+	return currentEXP;
+}
+
+int Player::getMaxEXP(){
+	return maxEXP;
+}
