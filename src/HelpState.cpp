@@ -10,11 +10,8 @@ using namespace std;
 HelpState::HelpState(){}
 
 State* HelpState::handleInput(){
-	//cout << "Help input" << endl;
 
-	char c;
-	c = getch();
-
+	char c = getch();
 	return new MenuState();
 }
 

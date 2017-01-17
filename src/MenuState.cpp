@@ -9,23 +9,14 @@ using namespace std;
 
 //TODO: Make it so that the title can be read from a file
 
-MenuState::MenuState()
-{
-	cout << "Menu init" << endl;
-	
+MenuState::MenuState(){
 	menuOptions[0] = "NEW GAME";
 	menuOptions[1] = "HELP";
-	menuOptions[2] = "QUIT";	
-	
-	cout << "Sizeof array is: " << sizeof(menuOptions)/sizeof(*menuOptions) << endl;
 	
 	selected = 0; 
-
 }
 
 State* MenuState::handleInput(){
-	//cout << "Menu input" << endl;
-	//cout << "selected == " << selected << endl;	
 
 	char c;
 	

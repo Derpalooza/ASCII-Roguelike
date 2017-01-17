@@ -12,15 +12,11 @@ LevelState::LevelState(){
 	levelNumber = 1;
 	level = new Level(levelNumber, player);
 
-
-	cout << "Level init" << endl;
-	cout << player->currentHP << "dadasdas" << endl;
 }
 
 State* LevelState::handleInput(){
 	
-	char c;
-	c = getch();
+	char c = getch();
 
 	int action = level->movePlayer(c);
 	
